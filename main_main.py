@@ -568,7 +568,7 @@ def sms_one():
 
 
 def sms_two():
-    link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24, data1, data2,  data4, data5, data6, data7, data8,  data10 ,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24 = data_links(number)
+    link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24, data1, data2,  data4, data5, data6, data7, data8,  data10 ,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24, params2 = data_links(number)
     time_sms_two = monotonic()
     global lst
     while Flag:  
@@ -703,7 +703,7 @@ def sms_two():
 def start_spam(message):
     global number
     number = message.text
-    link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24, data1, data2,  data4, data5, data6, data7, data8,  data10 ,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24 = data_links(number)
+    link1, link2,  link4, link5, link6, link7, link8,  link10,  link12, link13, link14, link15, link16, link17, link18, link19, link20, link21, link22, link23, link24, data1, data2,  data4, data5, data6, data7, data8,  data10 ,  data13, data14, data15, data16, data17, json_data111, data18, data19, number_call, data20, data1223, data21, data22, data23, data24, params2 = data_links(number)
     bot.send_message(message.chat.id, '*Спам Начинается !*', parse_mode="Markdown")
     global Flag
     Flag = True
